@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  heroku: circleci/heroku@1.0.1
+  python: circleci/python@2.1.1
 
 jobs:
   build-and-test:
@@ -39,10 +39,21 @@ jobs:
             docker push $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
 
   deploy-production:
-    executor: heroku/default
+    machine: true
     steps:
       - checkout
-      - heroku/deploy-via-git       
+      - run:
+          name: Deploy to Heroku
+          command: |
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku apps:create $HEROKU_APP_NAME --region eu --addons=heroku-postgresql
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DEBUG=0 -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a $HEROKU_APP_NAME web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a $HEROKU_APP_NAME web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py migrate -a $HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata db_data/test.json -a $HEROKU_APP_NAME       
 workflows:
   main:
     jobs:
