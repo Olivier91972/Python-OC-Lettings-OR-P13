@@ -46,13 +46,6 @@ jobs:
           name: Deploy to Heroku
           command: |
             #!/bin/bash
-            if [[ $HEROKU_API_KEY == "" ]]; then
-              echo "No Heroku API key set, please set the HEROKU_API_KEY environment variable."
-              echo "This can be found by running the $(heroku auth:token) command locally."
-              exit 1
-            else
-              echo "Heroku API key found."
-            fi
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku apps:create $HEROKU_APP_NAME --region eu --addons=heroku-postgresql
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
