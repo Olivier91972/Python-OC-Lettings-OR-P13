@@ -116,9 +116,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Sentry configuration
-# sentry_sdk.init(
-#     dsn=env('SENTRY_DSN'),
-#     integrations=[DjangoIntegration()],
-#     traces_sample_rate=1.0,
-#     send_default_pii=True
-# )
+sentry_sdk.init(
+    dsn=env('SENTRY_DSN'),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    send_default_pii=True
+)
