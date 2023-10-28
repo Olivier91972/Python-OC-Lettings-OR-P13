@@ -48,7 +48,7 @@ jobs:
       - checkout
       - run:
           name: Deploy to Heroku
-          command:
+          command: |-
             #!/bin/bash
             if ! command -v heroku &> /dev/null; then
             curl https://cli-assets.heroku.com/install.sh | sh
