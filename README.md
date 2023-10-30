@@ -140,7 +140,7 @@ Installation de gunicorn :
 
 Ne pas oublier de créer le Procfile à la racine du projet : 
 
-`web: gunicorn oc_lettings_site.wsgi --bind=0.0.0.0:$PORT`
+`web: gunicorn oc_lettings_or.wsgi --bind=0.0.0.0:$PORT`
 
 <hr>
 
