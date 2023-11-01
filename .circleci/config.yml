@@ -52,7 +52,7 @@ jobs:
           command: |-
             #!/bin/bash
 
-            if ! command -v heroku &> /dev/null; then
+            if ! sudo command -v heroku &> /dev/null; then
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             else
             echo "Heroku is already installed. No operation was performed."
