@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
+WSGI_APPLICATION = 'oc_lettings_or.wsgi.application'
 
 
 # Database
