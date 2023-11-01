@@ -36,8 +36,8 @@ jobs:
           name: Containerize
           command: |
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker build -t image_oc_lettings_site .
-            docker tag image_oc_lettings_site $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
+            docker build -t image_oc_lettings_or .
+            docker tag image_oc_lettings_or $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
             docker push $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
 
   deploy-production:
@@ -52,10 +52,10 @@ jobs:
           command: |-
             #!/bin/bash
 
-            sudo if ! command -v heroku &> /dev/null; then
+            if ! command -v heroku &> /dev/null; then
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             else
-            sudo echo "Heroku is already installed. No operation was performed."
+            echo "Heroku is already installed. No operation was performed."
             fi
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku apps:create $HEROKU_APP_NAME --region eu --addons=heroku-postgresql
@@ -64,6 +64,7 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DEBUG=0 -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a $HEROKU_APP_NAME web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a $HEROKU_APP_NAME web
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py migrate -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata db_data/test.json -a $HEROKU_APP_NAME
 workflows:
