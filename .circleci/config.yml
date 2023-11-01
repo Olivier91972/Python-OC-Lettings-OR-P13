@@ -51,7 +51,6 @@ jobs:
           name: Deploy to Heroku
           command: |-
             #!/bin/bash
-
             if ! command -v heroku &> /dev/null; then
             curl https://cli-assets.heroku.com/install.sh | sh
             else
