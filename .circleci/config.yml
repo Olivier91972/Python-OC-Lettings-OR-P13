@@ -8,7 +8,7 @@ orbs:
 jobs:
   build-and-test:
     docker:
-      - image: cimg/python:3.10.2
+      - image: cimg/python:3.12.0
     steps:
       - checkout
       - run:
@@ -36,8 +36,8 @@ jobs:
           name: Containerize
           command: |
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker build -t image_oc_lettings_or .
-            docker tag image_oc_lettings_or $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
+            docker build -t image_$DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1 .
+            docker tag image $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
             docker push $DOCKER_USERNAME/$PROJECT_NAME:$CIRCLE_SHA1
 
   deploy-production:
