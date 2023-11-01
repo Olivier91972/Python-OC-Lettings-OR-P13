@@ -62,9 +62,9 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku config:set DEBUG=0 -a $HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a $HEROKU_APP_NAME web
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a $HEROKU_APP_NAME web
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:sudo push -a $HEROKU_APP_NAME web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:sudo release -a $HEROKU_APP_NAME web
+#            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py migrate -a $HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku run python manage.py loaddata db_data/test.json -a $HEROKU_APP_NAME
 workflows:
