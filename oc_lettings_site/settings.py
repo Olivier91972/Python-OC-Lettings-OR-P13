@@ -10,11 +10,11 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Initialise environment variables
-env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+env = environ.Env(DEBUG=(bool, True))
+# environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY', default=get_random_secret_key())
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', f'{env("HEROKU_APP_NAME")}.herokuapp.com']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', f'{env("HEROKU_APP_NAME")}.herokuapp.com']
 
 # Application definition
 
@@ -117,9 +117,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Sentry configuration
-sentry_sdk.init(
-    dsn=env('SENTRY_DSN'),
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=1.0,
-    send_default_pii=True
-)
+# sentry_sdk.init(
+#     dsn=env('SENTRY_DSN'),
+#     integrations=[DjangoIntegration()],
+#     traces_sample_rate=1.0,
+#     send_default_pii=True
+# )
