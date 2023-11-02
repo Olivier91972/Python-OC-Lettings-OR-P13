@@ -24,11 +24,11 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 #### Cloner le repository
 
 - `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- `git clone https://github.com/Olivier91972/Python-OC-Lettings-OR-P13.git`
 
 #### Créer l'environnement virtuel
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/Python-OC-Lettings-OR-P13.git`
 - `python -m venv venv`
 - `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
 - Activer l'environnement `source venv/bin/activate`
@@ -40,7 +40,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Exécuter le site
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/Python-OC-Lettings-OR-P13`
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
 - `python manage.py runserver`
@@ -49,25 +49,25 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Linting
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/Python-OC-Lettings-OR-P13`
 - `source venv/bin/activate`
 - `flake8`
 
 #### Tests unitaires
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/Python-OC-Lettings-OR-P13`
 - `source venv/bin/activate`
 - `pytest`
 
 #### Base de données
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd /path/to/Python-OC-Lettings-OR-P13`
 - Ouvrir une session shell `sqlite3`
 - Se connecter à la base de données `.open oc-lettings-site.sqlite3`
 - Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
+- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-OR-P13_profile);`
 - Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
+  Python-OC-Lettings-OR-P13_profile where favorite_city like 'B%';`
 - `.quit` pour quitter
 
 #### Panel d'administration
@@ -87,7 +87,7 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 #### local
 
 - Télécharger et installer [Docker](https://docs.docker.com/get-docker/)
-- Se rendre dans le répertoire du projet `cd /path/to/Python-OC-Lettings-FR`
+- Se rendre dans le répertoire du projet `cd /path/to/Python-OC-Lettings-OR-P13`
 - Créer l'image `docker build -t <image-name> .` 
 - Lancer le conteneur `docker run -d -p 8080:8080 <image-name>`
 - Lancer un navigateur avec l'adresse http://127.0.0.1:8080/
