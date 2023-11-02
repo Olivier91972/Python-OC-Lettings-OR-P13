@@ -1,4 +1,5 @@
-
+{% extends "base.html" %}
+{% block content %}
 <title>Lettings</title>
 <h1>Lettings</h1>
 {% if lettings_list %}
@@ -16,3 +17,5 @@
 {% endif %}
 <div><a href="{% url 'home' %}">Home</a></div>
 <div><a href="{% url 'profiles:index' %}">Profiles</a></div>
+
+{% endblock %}

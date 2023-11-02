@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 <title>{{ profile.user.username }}</title>
 <h1>{{ profile.user.username }}</h1>
 <p>First name: {{ profile.user.first_name }}</p>
@@ -7,3 +10,5 @@
 <div><a href="{% url 'profiles:index' %}">Back</a></div>
 <div><a href="{% url 'home' %}">Home</a></div>
 <div><a href="{% url 'lettings:index' %}">Lettings</a></div>
+
+{% endblock %}
